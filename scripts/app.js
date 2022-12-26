@@ -154,7 +154,20 @@ function addToCarritoItem(e){
 
 function addItemCarrito(newItem){
 
+    const InputElemento = tbody.getElementsByClassName('input__elemento')
+    for(let i = 0; i < carrito.length; i++){
+        if(carrito[i].title.trim() === newItem.title.trim()){
+            carrito[i].cantidad ++;
+            const inputValue = InputElemento[i]
+            inputValue.value++;
+            CarritoTotal()
+
+            return null;
+        }
+    }
+
     carrito.push(newItem)
+
     renderCarrito()
 }
 function renderCarrito(){
@@ -169,13 +182,22 @@ function renderCarrito(){
         </td>
         <td class="table__precio"><p>${item.precio}</p></td>
         <td class="table__cantidad">
-            <input type="number" min="1" value="${item.cantidad}">
+            <input type="number" min="1" value=${item.cantidad} class="input__elemento">
             <button class="delete btn btn-danger">X</button>
         </td> `
 
         tr.innerHTML = Content;
         tbody.append(tr)
     })
-    
+    CarritoTotal()
 }
 
+function CarritoTotal(){
+    let Total = 0;
+    const ItemCartTotal =document.querySelector('.itemCartTotal')
+    carrito.forEach((item) => {
+        const precio = Number(item.precio.replace("$", ''))
+        Total = Total + precio*item.cantidad
+    })
+    ItemCartTotal.innerHTML = `Total $${Total}`
+}
