@@ -127,7 +127,7 @@
 
 
 /* pre entrega 3 */
-
+const finalizarcompra = document.getElementById("finalizar");
 const Clickbutton = document.querySelectorAll('.button')
 const tbody = document.querySelector('.tbody')
 let carrito = []
@@ -232,6 +232,15 @@ function removeItemCarrito(e){
     tr.remove()
     CarritoTotal()
 }
+
+finalizarcompra.addEventListener('click', () => {
+
+    Swal.fire(
+        'Genial',
+        'Haz finalizado tu compra!',
+        'success'
+    )
+}, )
 
 function sumaCantidad(e){
     const sumaInput = e.target
